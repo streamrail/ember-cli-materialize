@@ -33,6 +33,12 @@ module.exports = {
     app.import(app.bowerDirectory + '/materialize/dist/font/material-design-icons/Material-Design-Icons.woff', { destDir: 'font/material-design-icons' });
     app.import(app.bowerDirectory + '/materialize/dist/font/material-design-icons/Material-Design-Icons.woff2', { destDir: 'font/material-design-icons' });
 
+    app.import(app.bowerDirectory + '/material-design-icons/iconfont/MaterialIcons-Regular.eot', { destDir: 'font/material-icons' });
+    app.import(app.bowerDirectory + '/material-design-icons/iconfont/MaterialIcons-Regular.ttf', { destDir: 'font/material-icons' });
+    app.import(app.bowerDirectory + '/material-design-icons/iconfont/MaterialIcons-Regular.svg', { destDir: 'font/material-icons' });
+    app.import(app.bowerDirectory + '/material-design-icons/iconfont/MaterialIcons-Regular.woff', { destDir: 'font/material-icons' });
+    app.import(app.bowerDirectory + '/material-design-icons/iconfont/MaterialIcons-Regular.woff2', { destDir: 'font/material-icons' });
+
     app.import(app.bowerDirectory + '/materialize/dist/js/materialize.js');
   }
 };
