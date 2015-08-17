@@ -7,8 +7,12 @@ const { Component, computed, computed: { oneWay }, typeOf, run: { scheduleOnce }
 export default Component.extend(UsesSettings, {
   layout,
   tagName: 'a',
-  classNameBindings: ['btn:waves-effect', 'isFlat::waves-light', 'isDisabled:disabled:waves-effect', 'buttonClass'],
+  classNameBindings: ['btn:waves-effect', '_wavesClassString', 'isDisabled:disabled:waves-effect', 'buttonClass'],
   attributeBindings: ['isDisabled:disabled'],
+  wavesClass: 'waves-light',
+  _wavesClassString: computed('wavesClass', 'isFlat', function () {
+    return this.get('isFlat') ? this.get('wavesClass') : '';
+  }),
   text: null,
   icon: null,
   iconPosition: oneWay('_mdSettings.buttonIconPosition'),
