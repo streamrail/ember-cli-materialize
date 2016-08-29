@@ -6,12 +6,8 @@
     <option value="" disabled selected>{{prompt}}</option>
   {{/if}}
   {{#each content as |option|}}
-    {{#with (if (eq optionValuePath 'content') option (or (get option (md-regex-replace (or optionValuePath 'content.value') '(content\.|^content$)' '')) option)) as |optionValue|}}
-      {{#with (if (eq optionLabelPath 'content') option (or (get option (md-regex-replace (or optionLabelPath 'content.label') '(content\.|^content$)' '')) option)) as |optionLabel|}}
-        <option value={{optionValue}} selected={{if (eq value optionValue) "true"}}>{{optionLabel}}</option>
-      {{/with}}
-    {{/with}}
-  {{/each}}
+    <option value={{to-string (if (eq optionValuePath 'content') option (get option (md-regex-replace (or optionValuePath 'content.value') '(content\.|^content$)' '')))}} selected={{if (eq value (if (eq optionValuePath 'content') option (get option (md-regex-replace (or optionValuePath 'content.value') '(content\.|^content$)' '')))) "true"}}>{{if (eq optionLabelPath 'content') option (get option (md-regex-replace (or optionLabelPath 'content.label') '(content\.|^content$)' ''))}}</option>
+{{/each}}
 </select>
 
 <small class="red-text">
