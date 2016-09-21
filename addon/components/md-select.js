@@ -78,11 +78,10 @@ export default MaterializeInputField.extend({
   }),
 
   didUpdateAttrs(attrs){
-    
-    if (attrs.newAttrs.disabled !== attrs.oldAttrs.disabled){
+    if (attrs.newAttrs.disabled !== attrs.oldAttrs.disabled || attrs.newAttrs.value !== attrs.oldAttrs.value){
       scheduleOnce('afterRender', this, () => {
         this.$('select').material_select();
       });
     }
-  },
+  }
 });
