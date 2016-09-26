@@ -1,4 +1,4 @@
-export function initialize (container, application){
+export function initialize (application){
   var rootEl = document.querySelector(application.rootElement);
   var modalContainerEl = document.createElement('div');
   var emberModalDialog = application.emberModalDialog || {};

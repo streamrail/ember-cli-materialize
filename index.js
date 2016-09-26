@@ -35,6 +35,7 @@ module.exports = {
 
     if (!(app.options['ember-cli-materialize'] && app.options['ember-cli-materialize'].includeJS === false)) {
         app.import(app.bowerDirectory + '/materialize/dist/js/materialize.js');
+        app.import(app.bowerDirectory + '/materialize-clockpicker/src/js/materialize.clockpicker.js');
     }
   }
 };

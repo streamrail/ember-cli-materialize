@@ -67,7 +67,7 @@ export default Component.extend({
 				let $el = $(el),
 					tooltip = $el.attr('data-tooltip'),
 					tooltipId = $el.attr('data-tooltip-id');
-				return !tooltip && tooltipId
+				return !tooltip && tooltipId;
 			}, this)
 			.forEach(function(el) {
 				var $el = $(el);
@@ -75,7 +75,7 @@ export default Component.extend({
 				$el.off('mouseenter.tooltip').off('mouseleave.tooltip');
 				el.removeAttribute('data-tooltip-id');
 				$('#' + tooltipId).remove();
-			}, this)
+			}, this);
 	},
 
 	destroyTooltips: on('willDestroyElement', function() {

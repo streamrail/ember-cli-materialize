@@ -78,7 +78,7 @@ export default MaterializeInputField.extend({
   }),
 
   didUpdateAttrs(attrs){
-    const disabledChanged = (attrs.newAttrs.disabled || {}).value !== (attrs.oldAttrs.disabled || {}).value
+    const disabledChanged = (attrs.newAttrs.disabled || {}).value !== (attrs.oldAttrs.disabled || {}).value;
     if (disabledChanged){
       scheduleOnce('afterRender', this, () => {
         this.$('select').material_select();

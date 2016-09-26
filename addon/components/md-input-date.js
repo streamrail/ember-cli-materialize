@@ -3,10 +3,6 @@ import MaterializeInput from './md-input';
 import layout from '../templates/components/md-input-date';
 import getAttr from '../utils/get-attr';
 
-const {
-  get
-} = Ember;
-
 const m = window.moment;
 
 export default MaterializeInput.extend({
@@ -39,7 +35,7 @@ export default MaterializeInput.extend({
       var options = {
         timestamp: evt.select,
         clear: evt.clear === null 
-      }
+      };
       this._onDateSet(options);
     };
     var _onClose = () => {
@@ -140,6 +136,6 @@ export default MaterializeInput.extend({
   },
 
   normalizeDate(date){
-    return moment([date.getFullYear(), date.getMonth(), date.getDate()]).toDate();
+    return m([date.getFullYear(), date.getMonth(), date.getDate()]).toDate();
   }
 });

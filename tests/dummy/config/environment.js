@@ -21,7 +21,7 @@ module.exports = function(environment) {
       // when it is created
     },
     sassOptions: {
-      includePaths: ['bower_components/materialize/sass']
+      includePaths: ['bower_components/materialize/sass', 'bower_components/materialize-clockpicker/src/sass']
     }
   };
 
