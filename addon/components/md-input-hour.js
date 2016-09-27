@@ -50,7 +50,7 @@ export default MaterializeInput.extend({
     }
   },
 
-  didReceiveAttrs() {
+  didUpdateAttrs() {
     this._super(...arguments);
     var value = this.getAttr('value');
     this.updateHourPicker({
