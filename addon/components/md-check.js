@@ -30,7 +30,7 @@ export default SelectableItem.extend({
 					el.on(`change.${this.get('elementId')}`, function() {
 						if (this.getAttr('onChange')) {
 							later(this, function() {
-								this.attrs.onChange(this.$('.ember-checkbox').is(':checked'));
+								this.getAttr('onChange')('onChange')(this.$('.ember-checkbox').is(':checked'));
 							}, 100);
 						}
 					}.bind(this));
