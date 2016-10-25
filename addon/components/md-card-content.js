@@ -9,10 +9,6 @@ export default Component.extend({
   classNames: ['card-content'],
 
   classNameBinding: 'class',
-  titleBinding: 'parentView.title',
-  titleClassBinding: 'parentView.titleClass',
-  activatorBinding: 'parentView.activator',
-
   cardTitleClass: computed('titleClass', function() {
     return this.get('titleClass') || 'black-text';
   })
