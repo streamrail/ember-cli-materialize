@@ -19,7 +19,7 @@ export default Component.extend({
     const max = this.get('max');
     const min = this.get('min');
     const range = this.get('range');
-    const current = this.get('current');
+    const current = this.getCurrentNumber();
 
     const middle = Math.floor((max - min) / 2);
     let low = Math.max(min, current - Math.floor(range / 2));
@@ -40,7 +40,13 @@ export default Component.extend({
   _pages: computed('windowRange.low', 'windowRange.high', 'current', function() {
     const a = new A([]);
     const winRange = this.get('windowRange');
-    const current = this.get('current');
+    let current = this.getCurrentNumber();
+    if (typeof current === 'string') {
+      current = Number(current);
+      if (isNaN(current)) {
+        current = 1;
+      }
+    }
     for (let i = winRange.low; i <= winRange.high; i += 1) {
       a.addObject({ val: i, cssClass: (current === i ? 'active' : 'waves-effect') });
     }
@@ -48,11 +54,11 @@ export default Component.extend({
   }),
 
   _canGoBack: computed('min', 'current', function() {
-    return this.get('current') > this.get('min');
+    return this.getCurrentNumber() > this.get('min');
   }),
 
   _canGoFwd: computed('max', 'current', function() {
-    return this.get('current') < this.get('max');
+    return this.getCurrentNumber() < this.get('max');
   }),
 
   incrementClass: computed('_canGoFwd', function() {
@@ -62,6 +68,16 @@ export default Component.extend({
   decrementClass: computed('_canGoBack', function() {
     return this.get('_canGoBack') ? '' : 'disabled';
   }),
+  getCurrentNumber(){
+    let current = this.get('current');
+    if (typeof current === 'string') {
+      current = Number(current);
+      if (isNaN(current)) {
+        current = 1;
+      }
+    }
+    return current;
+  },
 
   actions: {
     oneBack() {
