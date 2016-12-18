@@ -48,9 +48,8 @@ export default Component.extend({
             var value = this.$('input').val();
             if ((this.get('pressedKeys') || '').split(',').indexOf(e.which.toString()) !== -1 && this.attrs.onKeypress) {
               later(this, () => {
-                this.attrs.onKeypress(value);
+                this.attrs.onKeypress(e, value);
               }, 100);
-              
             }
           });
         }
