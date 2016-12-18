@@ -45,9 +45,10 @@ export default Component.extend({
         let el = this.$('input');
         if (el) {
           el.on(`keypress.${this.get('elementId')}`, (e) => {
+            var value = this.$('input').val();
             if ((this.get('pressedKeys') || '').split(',').indexOf(e.which.toString()) !== -1 && this.attrs.onKeypress) {
               later(this, () => {
-                this.attrs.onKeypress();
+                this.attrs.onKeypress(value);
               }, 100);
               
             }
