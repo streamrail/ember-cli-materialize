@@ -5,9 +5,9 @@ export default SelectableItemGroup.extend({
   classNames: ['md-radios'],
   selectableItemView: 'md-radios-radio',
   bindToInputs: afterRender(function(){
-  	this.$().on(`change.${this.get('elementId')}`, 'input[type="radio"]:checked', function(event){
+  	this.$().on(`change.${this.get('elementId')}`, 'input[type="radio"]:checked', event => {
   		if (this.attrs.onChange) {
-  			this.attrs.onChange(this.value);
+  			this.attrs.onChange(event.target.value);
   		}
   	});
   }),
