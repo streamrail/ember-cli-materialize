@@ -9,9 +9,10 @@ export default InputField.extend({
 		this._super(...arguments);
 		// make sure the label moves when a value is bound.
 		this._setupLabel();
+
 	},
 
-	applyPlaceholder: afterRender(function() {
-		this.$('textarea').attr('placeholder', this.get('placeholder'));
+	afterRender: afterRender(function() {
+		this.$('textarea').attr('placeholder', this.get('placeholder')).trigger('autoresize');
 	})
 });
