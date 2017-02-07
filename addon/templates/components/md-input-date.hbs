@@ -4,7 +4,7 @@
 
 <input type="date"
   id="{{id}}"
-  class="{{if validate 'validate'}} {{if errors 'invalid' 'valid'}} datepicker"
+  class="{{if validate 'validate'}} {{if validate (if errors 'invalid' 'valid')}} datepicker"
   data-value="{{value}}"
   placeholder={{placeholder}}
   required={{required}}
