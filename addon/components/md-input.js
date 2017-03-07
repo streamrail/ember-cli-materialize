@@ -19,23 +19,52 @@ export default MaterializeInputField.extend({
 	intValue: computed('value', {
 
 		set(key, value) {
-			if (value !== this.get('intValue')) {
-				this.set('value', value);
-			}
+			const parsedValue = parseFloat(value);
+			const formattedValue = isNaN(parsedValue) ? '' : d3.format(',')(parsedValue);
+			this.set('value', formattedValue);
 			return value;
 		},
 
 		get() {
 			var value = this.get('value');
-			var intValue = parseFloat(value);
+			var intValue = /^[0-9,]+$/.test(value) ? parseFloat(value && value.replace ? value.replace(/,/g, '') : value) : NaN;
 			if (isBlank(value)) {
 				return null;
 			} else {
-				return isNaN(intValue) ? NaN : intValue;
+				if (isNaN(intValue)) {
+					const newValue = this.$('input').val().replace(/\D/g, '');
+					const formattedNewValue = d3.format(',')(newValue);
+					this.$('input').val(formattedNewValue);
+					this.set('value', formattedNewValue);
+					return parseFloat(newValue);
+				} else {
+					return intValue;
+				}
 			}
 		}
 
 	}),
+
+	// intValue: computed('value', {
+
+	// 	set(key, value) {
+	// 		if (value !== this.get('intValue')) {
+	// 			this.set('value', value);
+	// 		}
+	// 		return value;
+	// 	},
+
+	// 	get() {
+	// 		var value = this.get('value');
+	// 		var intValue = parseFloat(value);
+	// 		if (isBlank(value)) {
+	// 			return null;
+	// 		} else {
+	// 			return isNaN(intValue) ? NaN : intValue;
+	// 		}
+	// 	}
+
+	// }),
 
 	floatValue: computed('value', {
 
