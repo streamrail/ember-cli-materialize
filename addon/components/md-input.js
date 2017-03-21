@@ -9,11 +9,23 @@ const {
 export default MaterializeInputField.extend({
 	layout,
 	type: 'text',
+	_previousValue: '',
 
 	didInsertElement() {
 		this._super(...arguments);
 		// make sure the label moves when a value is bound.
 		this._setupLabel();
+		this.$('input').on('keyup paste', event => {
+			if (this.get('_previousValue') !== event.target.value && this.getAttr('onChange')) {
+				this.set('_previousValue', event.target.value);
+				this.getAttr('onChange')(event.target.value);
+			}
+		});
+	},
+
+	didReceiveAttrs(attrs){
+		this._super(attrs);
+		this.set('_previousValue', attrs.newAttrs.value);
 	},
 
 	intValue: computed('value', {
