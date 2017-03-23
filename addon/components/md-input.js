@@ -16,10 +16,12 @@ export default MaterializeInputField.extend({
 		// make sure the label moves when a value is bound.
 		this._setupLabel();
 		this.$('input').on('keyup paste', event => {
-			if (this.get('_previousValue') !== event.target.value && this.getAttr('onChange')) {
-				this.set('_previousValue', event.target.value);
-				this.getAttr('onChange')(event.target.value);
-			}
+			Ember.run.scheduleOnce('afterRender', this, () => {
+				if (this.get('_previousValue') !== event.target.value && this.getAttr('onChange')) {
+					this.set('_previousValue', event.target.value);
+					this.getAttr('onChange')(event.target.value);
+				}
+			})
 		});
 	},
 
