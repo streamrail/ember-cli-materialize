@@ -25,9 +25,9 @@ export default MaterializeInputField.extend({
 		});
 	},
 
-	didReceiveAttrs(attrs){
-		this._super(attrs);
-		this.set('_previousValue', attrs.newAttrs.value);
+	didReceiveAttrs(){
+		this._super(...arguments);
+		this.set('_previousValue', this.getAttr('value'));
 	},
 
 	intValue: computed('value', {

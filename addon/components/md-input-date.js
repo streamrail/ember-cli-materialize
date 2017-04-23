@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import MaterializeInput from './md-input';
 import layout from '../templates/components/md-input-date';
-import getAttr from '../utils/get-attr';
+import diffAttrs from 'ember-diff-attrs';
 
 const m = window.moment;
 
@@ -87,23 +87,24 @@ export default MaterializeInput.extend({
     }
   },
 
-  didUpdateAttrs(attrs) {
-    this._super(...arguments);
-    var currentSelected = getAttr(attrs.oldAttrs, 'selected');
-    var selected = getAttr(attrs.newAttrs, 'selected');
-    var max = getAttr(attrs.newAttrs, 'max');
-    var min = getAttr(attrs.newAttrs, 'min');
-    var shouldSelectNull = selected === null;
-    selected = this.getDate(selected, currentSelected);
-    max = this.getDate(max, null, Infinity);
-    min = this.getDate(min, null, -Infinity);
-    this.updateDatePicker({
-      shouldSelectNull,
-      selected,
-      min,
-      max
-    });
-  },
+  didReceiveAttrs: diffAttrs('selected', 'max', 'min', function(changedAttrs, ...args){
+    this._super(...args);
+    if (changedAttrs) {
+      var max = this.getAttr('max');
+      var min = this.getAttr('min');
+      var selected = this.getAttr('selected');
+      var shouldSelectNull = selected === null;
+      selected = this.getDate(selected, changedAttrs.selected ? changedAttrs.selected[0] : null);
+      max = this.getDate(max, null, Infinity);
+      min = this.getDate(min, null, -Infinity);
+      this.updateDatePicker({
+        shouldSelectNull,
+        selected,
+        min,
+        max
+      });
+    }
+  }),
 
   getDate(input, compareWith= null, defaultResult = null) {
     var iMoment = m(input || null);

@@ -2,13 +2,9 @@ import Ember from 'ember';
 import MaterializeInputField from './md-input-field';
 import layout from '../templates/components/md-select';
 import afterRender from '../utils/after-render';
-const {
-  on,
-  run: {
-    later,
-    scheduleOnce
-  }
-} = Ember;
+import diffAttrs from 'ember-diff-attrs';
+import { later, scheduleOnce } from 'ember-runloop';
+import on from 'ember-evented/on';
 
 export default MaterializeInputField.extend({
   layout,
@@ -77,13 +73,12 @@ export default MaterializeInputField.extend({
      this.$().off(`change.${this.get('elementId')}`);
   }),
 
-  didUpdateAttrs(attrs){
-    const disabledChanged = (attrs.newAttrs.disabled || {}).value !== (attrs.oldAttrs.disabled || {}).value;
-    const valueChanged = (attrs.newAttrs.value || {}).value !== (attrs.oldAttrs.value || {}).value;
-    if (disabledChanged || valueChanged){
+  didReceiveAttrs: diffAttrs('disabled', 'value', function(changedAttrs, ...args) {
+    this._super(...args);
+    if (changedAttrs && (changedAttrs.disabled || changedAttrs.value)) {
       scheduleOnce('afterRender', this, () => {
         this.$('select').material_select();
       });
     }
-  }
+  })
 });
