@@ -15,7 +15,7 @@ module.exports = {
       this.addPackageToProject('ember-modal-dialog', '~0.7.5'),
       this.addPackageToProject('ember-cli-sass', '^3.3.0'),
       this.addPackageToProject('ember-truth-helpers', '~1.2.0'),
-      this.addPackageToProject('ember-keyboard', '^1.0.3')
+      this.addPackageToProject('ember-keyboard', '^2.1.0')
     ]);
   }
 }
