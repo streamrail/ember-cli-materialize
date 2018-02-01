@@ -9,7 +9,7 @@ const {
 export default MaterializeInputField.extend({
 	layout,
 	type: 'text',
-	_previousValue: '',
+	_previousValue: null,
 
 	didInsertElement() {
 		this._super(...arguments);
