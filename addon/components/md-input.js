@@ -101,6 +101,7 @@ export default MaterializeInputField.extend({
 		set(key, value = []) {
 			var currentValue = this.get('value') || '';
 			if (value === null) {
+			  this.set('value', null);
 				return value;
 			}
 			if (value.join(',') === currentValue) {
