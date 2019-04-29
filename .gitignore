@@ -17,3 +17,6 @@ npm-debug.log
 testem.log
 *.sublime-workspace
 lcov.dat
+
+.idea
+*.iml
